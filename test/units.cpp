@@ -4,6 +4,8 @@
 #include <gtest/gtest.h>
 #pragma warning(pop)
 
+#include <sstream>
+
 using namespace ctd::unit_literals;
 
 namespace ctd {
@@ -53,7 +55,7 @@ namespace ctd {
             EXPECT_EQ(25_uA, 500_mV / 20_kOhm);
         }
 
-       TEST(QuantityTest, DivisionByScalar) {
+        TEST(QuantityTest, DivisionByScalar) {
             EXPECT_EQ(25_mV, 500_mV / 20);
         }
 
@@ -92,6 +94,13 @@ namespace ctd {
         TEST(QuantityTest, GreaterEqualsScaled) {
             EXPECT_GE(1_F, 1000_mF);
             EXPECT_GE(1_F, 999_mF);
+        }
+
+        TEST(QuantityTest, PrintUnits){
+            std::stringstream ss;
+            ss << 10_N;
+            std::string output = ss.str();
+            EXPECT_EQ("10 m*kg/s^2", output);
         }
 
         TEST(QuantityTest, MakeUnity) {
